@@ -1,0 +1,141 @@
+body{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+/* .bg-dark{
+background-color: green;
+}
+
+.bg-light{
+    background-color: yellow;
+} */
+.responsive {
+    width: 100%;
+    max-height: 100vh;
+  }
+
+.navbar{
+    margin: 0;
+    border-radius: 0;
+}
+
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+  }
+
+  .affix + .container-fluid {
+    padding-top: 70px;
+  }
+
+
+.float{
+    padding: 0;
+}
+.Mytext {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center; 
+  }
+
+/* .Mytext input , button{
+    height: 50px;
+}
+
+.Mytext button {
+    width: 80px;
+
+}
+
+.Mytext button .bg{
+    width: 80px;
+} */
+
+footer{
+    margin-top: 20px;
+    background-color: rgb(28, 23, 23);
+    padding: 20px;
+    color: white;
+}
+
+
+@media (max-width: 480px){
+    body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      .responsive {
+        width: 100%;
+        max-height: 100vh;
+      }
+      /* .Mytext input , button{
+        height: 15px;
+      }
+      .Mytext button {
+        width: 10px;
+    
+    }
+      .btn , button ,i{
+        height: 20px;
+      } */
+      .h1 {
+        font-size: 15px;
+      }
+      p{
+        font-size: 10px;
+      }
+      .navbar {
+        margin: 0;
+        border-radius: 0;
+      }
+      
+      .affix {
+        top: 0;
+        width: 100%;
+        z-index: 9999 !important;
+      }
+      
+      .affix + .container-fluid {
+        padding-top: 70px;
+      }
+      
+      .float {
+        padding: 0;
+      }
+      
+      .Mytext {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+      }
+      
+      .Mytext input,
+      .Mytext button {
+        height: 50px;
+      }
+      
+      .Mytext button {
+        width: 80px;
+      }
+      
+      .Mytext button .bg {
+        width: 80px;
+      }
+      
+      footer {
+        margin-top: 20px;
+        background-color: rgb(28, 23, 23);
+        padding: 20px;
+        color: white;
+      }
+}

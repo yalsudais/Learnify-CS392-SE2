@@ -5,6 +5,9 @@
     height: 100vh;
   }
    */
+   a{
+    text-decoration: none;
+   }
   .profile {
     text-align: center;
     margin-bottom: 20px;

@@ -118,3 +118,25 @@ function update_subjects($subject_id, $subject_name, $image_banner = "")
         }
     }
 }
+function showSubject()
+{
+   global $conn;
+   $query = $conn->query("SELECT `subject_id`, `subject_name`, `image_banner` FROM `subjects`");
+   $htmlCode = '<ul class="nav flex-column">';
+   while ($row = $query->fetch_assoc()) {
+      $htmlCode .= '
+      <li>
+         <div class="card mb-1 showSub" data-bs-toggle="tab" data-id="'.$row["subject_id"].'" data-subjectName="'.$row["subject_name"].'">
+            <div class="card-body">
+               <img src="upload_image/'.$row["image_banner"].'" alt="" class="img-fluid">
+            </div>
+            <div class="card-head text-center pb-2">
+               '.$row["subject_name"].'
+            </div>
+         </div>
+      </li>';
+   }
+   $htmlCode .= '</ul>';
+
+   echo $htmlCode;
+}

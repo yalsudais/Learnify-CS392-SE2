@@ -14,7 +14,7 @@ if(isset($_POST["function_name"]))
         echo "Error: " . $e->getMessage();
     }
 }
-function add_courses($course_id, $course_code, $course_name, $course_description, $course_price, $subject_id)
+function add_courses($course_id=0, $course_code, $course_name, $course_description, $course_price, $subject_id)
 {
     global $conn;
 
@@ -34,7 +34,7 @@ function add_courses($course_id, $course_code, $course_name, $course_description
         // Move the uploaded file to the desired directory
         if (move_uploaded_file($file_tmp, $upload_dir . $file_name)) {
             // Prepare the SQL statement
-            $sql = "INSERT INTO `courses` (`course_id`, `course_code`, `course_name`, `course_description`, `course_price`,  `course_banner_image`, `subject_id`) VALUES ('$course_id', '$course_code', '$course_name', '$course_description', '$course_price', '$file_name',  '$subject_id')";
+            $sql = "INSERT INTO `courses` ( `course_code`, `course_name`, `course_description`, `course_price`,  `course_banner_image`, `subject_id`) VALUES ('$course_code', '$course_name', '$course_description', '$course_price', '$file_name',  '$subject_id')";
     
             // Execute the SQL statement
             if ($conn->query($sql) === TRUE) {
@@ -134,5 +134,74 @@ function update_courses($course_id, $course_code, $course_name, $course_descript
     } else {
         throw new Exception("Error: " . $conn->error);
     }
+}
+
+// function showVideoDetails($course_id,$content_type)
+// {
+//     global  $conn;
+//     $query = $conn->query("SELECT contentuploads.`upload_id`, contentuploads.`user_id`, contentuploads.`title`, contentuploads.`content`, contentuploads.`path`, contentuploads.`image`, contentuploads.`subject_id`, concat(courses.`course_id`,'-',courses.`course_code`) as'course_id', contentuploads.`content_type`, contentuploads.`upload_time`, contentuploads.`is_approved` FROM `contentuploads`   inner join subjects on contentuploads.subject_id =subjects.subject_id  inner join courses on contentuploads.course_id =courses.course_id where content_type='$content_type' and contentuploads.course_id='$course_id'");
+    
+//     $data = $query->fetch_all(MYSQLI_ASSOC);
+    
+//     echo json_encode($data);
+// }
+function showVideoDetails($id)
+{
+    global $conn;
+    $videos = array();
+    $query = $conn->query("SELECT `upload_id`, `user_id`, `title`, `content`, `path`, `image`, `subject_id`, `course_id`, `content_type`, `upload_time`, `is_approved` FROM `contentuploads` WHERE course_id='$id'and content_type=3");
+    while ($row = $query->fetch_assoc()) {
+        $videos[] = $row;
+    }
+    $count = 0;
+    $htmlCode = '';
+    foreach ($videos as $video) {
+        if ($count % 6 == 0) {
+            $htmlCode .= '<div class="row">';
+        }
+        $htmlCode .= '<div class="card-details">
+        <video id="video-' . $video['upload_id'] . '" src="' . $video['path'] . '" controls></video>
+        <div class="button-container">
+            <button class="edit-video-btn" data-id="' . $video['upload_id'] . '" data-course_id="' . $video['course_id'] . '" data-description_video="' . $video['content'] . '" data-file_name="' . $video['title'] . '"> Edite </button>
+            <button class="delete-video-btn" data-id="' . $video['upload_id'] . '"> Delete </button>
+        </div>
+    </div>';
+        $count++;
+        if ($count % 6 == 0) {
+            $htmlCode .= '</div>';
+        }
+    }
+    if ($count % 6 != 0) {
+        $htmlCode .= '</div>';
+    }
+    return $htmlCode;
+}
+function generateCoursesHTMLDetails($subject_id)
+{
+    global $conn;
+    $coursesHTML = '<div class="owl-carousel related-carousel position-relative" style="padding: 0 30px;">';
+
+    $query = "SELECT courses.course_id, courses.course_code, courses.course_name, courses.course_description, courses.course_price, courses.create_date, courses.course_banner_image, CONCAT(subjects.subject_id, '-', subjects.subject_name) AS subject_id FROM courses INNER JOIN subjects ON courses.subject_id = subjects.subject_id WHERE courses.subject_id='$subject_id'";
+    $result = mysqli_query($conn, $query);
+
+    if ($result) {
+        while ($row = mysqli_fetch_assoc($result)) {
+            $courseHTML = '<div class="courses-list-item">';
+            $courseHTML .= '<a class="position-relative d-block overflow-hidden mb-2" href="vidoeDetiles.php?course_id=' . $row['course_id'] . '">';
+            $courseHTML .= '<img class="img-fluid" src="upload_image/' . $row['course_banner_image'] . '" style="width:100px; height:200px;" alt="">';
+            $courseHTML .= '<div class="courses-text">';
+            $courseHTML .= '<h4 class="text-center text-white px-3">' . $row['course_name'] . '</h4>';
+            $courseHTML .= '</div>';
+            $courseHTML .= '</a>';
+            $courseHTML .= '</div>';
+
+            $coursesHTML .= $courseHTML;
+        }
+        mysqli_free_result($result);
+    }
+
+    $coursesHTML .= '</div>';
+
+    return $coursesHTML;
 }
 ?>

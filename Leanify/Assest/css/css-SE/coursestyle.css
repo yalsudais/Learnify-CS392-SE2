@@ -1,0 +1,115 @@
+
+body{
+    
+}
+    .navbar-dark {
+        background-color: #6665ee;
+        color: #fff;
+    }
+
+    .bg-dark {
+        background-color: #6665ee;
+        color: #fff;
+    }
+
+    .bg {
+        background-color: #6665ee;
+    }
+
+    .text-bg {
+        color: #6665ee;
+    }
+
+    td,
+    tbody,
+    thead {
+        border-radius: 7px;
+    }
+
+    .sidebar {
+        width: 18%;
+        height: 100vh;
+        position: fixed;
+        left: 0;
+        top: 0;
+        background-color: #f8f9fa;
+        overflow-y: auto;
+        transition: width 0.3s ease;
+        padding: 5px;
+        margin-top: 70px;
+    }
+
+    li {
+        cursor: pointer;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        box-shadow: none;
+        transition: box-shadow 0.3s;
+    }
+
+    li:hover {
+        box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+    }
+
+    .nav-item {
+        padding: 10px 20px;
+        transition: background-color 0.3s ease;
+    }
+
+    .nav-item:hover {
+        background-color: #e9ecef;
+
+    }
+
+    .nav-link {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .nav-link i {
+        font-size: 20px;
+    }
+
+    .content {
+        margin-left: 20%;
+        padding: 20px;
+        transition: margin-left 0.3s ease;
+    }
+
+    .content.active {
+        margin-left: 25%;
+    }
+
+
+
+    @media (max-width: 767px) {
+        .card {
+            width: 100%;
+            max-width: 200px;
+            margin-left: 2px;
+            /* تحديد العرض الأقصى للكارد */
+        }
+
+        .card .card-body {
+            padding: 2px;
+            /* ضبط حجم الهامش الداخلي للكارد بادي وأعلى */
+        }
+
+        .card .card-body img,
+        .card .card-body span {
+            display: none;
+        }
+
+        .card .card-body:hover span {
+            display: none;
+        }
+
+        .nav-tabs .nav-item .nav-link {
+            padding: 0;
+            margin: 0;
+            /* ضبط حجم الهامش الداخلي للروابط في الناف بادين */
+            font-size: 10px;
+            /* تصغير حجم الخط في الروابط في الناف بادين */
+        }
+    }

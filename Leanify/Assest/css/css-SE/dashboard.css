@@ -7,6 +7,53 @@
     font-family: 'Poppins', sans-serif;
 }
 
+/* Light Mode styles */
+.modal-content input {
+    background-color: #ccc;
+    color: #fff;
+    border: 1px solid #ccc;
+    padding: 8px;
+    border-radius: 4px;
+}
+
+/* Dark Mode styles */
+.dark .modal-content input  {
+    background-color: #3A3B3C;
+    color: #ccc;
+    border-color: #888;
+}
+
+/* Light Mode styles */
+.card.darkmode,
+.card-body.darkmode,
+.table.darkmode {
+    background-color: #3A3B3C;
+    color: #ccc;
+}
+
+.card.darkmode h3,
+.card.darkmode p,
+.card.darkmode .table td,
+.card.darkmode .table th {
+    color: #ccc; /* Apply white text color to specific elements */
+}
+
+/* Dark Mode styles */
+.dark .card.darkmode,
+.dark .card-body.darkmode,
+.dark .modal-content ,
+.dark .table.darkmode {
+    background-color: #3A3B3C; /* Update the background color for dark mode */
+    color: #ccc; /* Update the text color for dark mode */
+}
+
+.dark .card.darkmode h3,
+.dark .card.darkmode p,
+.dark .card.darkmode .table td,
+.dark .modal-content ,
+.dark .card.darkmode .table th {
+    color: #ccc /* Update the text color for specific elements in dark mode */
+}
 :root{
     /* ===== Colors ===== */
     --primary-color: #0E4BF1;
@@ -85,12 +132,12 @@ nav .logo-name{
 nav .logo-image{
     display: flex;
     justify-content: center;
-    min-width: 45px;
+    min-width: 60px;
 }
 nav .logo-image img{
-    width: 40px;
+    width: 60px;
     object-fit: cover;
-    border-radius: 50%;
+    border-radius: 5px;
 }
 
 nav .logo-name .logo_name{
@@ -456,3 +503,28 @@ nav.close ~ .dashboard .top{
         width: 100%;
     }
 }
+
+/* choos file leble in models page */
+.custom-file-upload {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #f1f1f1;
+    color: #333;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 4px;
+    width: 100%;
+    text-align: center;
+  }
+  
+  .custom-file-upload:hover {
+    background: #e6e6e6;
+  }
+  
+  .custom-file-upload span {
+    margin-left: 5px;
+  }
+  .SaveButton , .CloseButton{
+      width: 200px;
+      
+  }

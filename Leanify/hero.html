@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/vendor/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+  <style>
+    .clear-icon {
+      cursor: pointer;
+      margin-left: -30px;
+    }
+    .results-section {
+      margin-top: 20px;
+    }
+    .result-item {
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center mt-5">
+      <div class="col-md-6">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <button class="btn btn-primary" id="searchButton">
+              <i class="uil uil-search"></i>
+            </button>
+          </div>
+          <input type="text" id="searchInput" class="form-control" placeholder="Search...">
+          <div class="input-group-append">
+            <i class="uil uil-times-circle clear-icon input-group-text" id="clearButton" style="display: none;"></i>
+            <div class="dropdown">
+              <button class="btn btn-outline-primary dropdown-toggle" id="filterButton" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="uil uil-filter"></i> Filter
+              </button>
+              <div class="dropdown-menu" aria-labelledby="filterButton">
+                <a class="dropdown-item filterOption" href="#" data-filter="option1">Option 1</a>
+                <a class="dropdown-item filterOption" href="#" data-filter="option2">Option 2</a>
+                <a class="dropdown-item filterOption" href="#" data-filter="option3">Option 3</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row justify-content-center mt-5 results-section" id="resultsSection" style="display: none;">
+      <div class="col-md-6">
+        <h3>Search Results:</h3>
+        <div id="resultsContainer"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="js/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+      var searchInput = $('#searchInput');
+      var clearButton = $('#clearButton');
+      var filterButton = $('#filterButton');
+      var resultsSection = $('#resultsSection');
+      var resultsContainer = $('#resultsContainer');
+
+      function filterResults(filterOption) {
+        var searchText = searchInput.val().toLowerCase();
+        console.log("Performing filtering for option: " + filterOption);
+        console.log("Search Text: " + searchText);
+
+        // Perform search and display results
+        var searchResults = performSearch(searchText, filterOption);
+        displayResults(searchResults);
+
+        filterButton.html('<i class="uil uil-filter"></i> ' + filterOption);
+        $('.dropdown-menu').removeClass('show');
+      }
+
+      function performSearch(searchText, filterOption) {
+        // Perform search logic here and return the search results
+        // You can replace this with your actual search implementation
+        var results = [];
+        if (searchText === 'example' && filterOption === 'option1') {
+          results = [
+            { title: 'Result 1', snippet: 'This is the snippet for Result 1.' },
+            { title: 'Result 2', snippet: 'This is the snippet for Result 2.' },
+            { title: 'Result 3', snippet: 'This is the snippet for Result 3.' }
+          ];
+        }
+        return results;
+      }
+
+      function displayResults(searchResults) {
+        resultsContainer.empty();
+
+        if (searchResults.length > 0) {
+          for (var i = 0; i < searchResults.length; i++) {
+            var result = searchResults[i];
+            var resultItem = '<div class="result-item"><h5>' + result.title + '</h5><p>' + result.snippet + '</p></div>';
+            resultsContainer.append(resultItem);
+          }
+          resultsItem.append('<div class="result-item"><h5>' + result.title + '</h5><p>' + result.snippet + '</p></div>');
+        } else {
+          resultsContainer.html('<p>No results found.</p>');
+        }
+
+        resultsSection.show();
+      }
+
+      // Event listeners
+      searchInput.on('input', function() {
+        var searchText = searchInput.val();
+        if (searchText.trim() !== '') {
+          clearButton.show();
+        } else {
+          clearButton.hide();
+        }
+      });
+
+      clearButton.on('click', function() {
+        searchInput.val('');
+        clearButton.hide();
+        resultsSection.hide();
+      });
+
+      $('.filterOption').on('click', function(e) {
+        var filterOption = $(this).data('filter');
+        filterResults(filterOption);
+        e.preventDefault();
+      });
+
+      $('#searchButton').on('click', function() {
+        var searchText = searchInput.val();
+        var filterOption = filterButton.text().trim().replace('Filter', '').trim();
+        filterResults(filterOption);
+      });
+    });
+  </script>
+</body>
+</html>
